@@ -18,13 +18,13 @@
   });
 
   (function(){
-  emailjs.init("vWJY6QCtxow9t7WUQ");
+  emailjs.init("DXUgvz-eYN69tya74");
 })();
 
 document.getElementById('bookForm').addEventListener('submit', function(e){
   e.preventDefault();
 
-  emailjs.send("service_rdwojrp", "template_ow0hksc", {
+  emailjs.send("service_pqg89yy", "template_okyb9y3", {
     name: document.getElementById('name').value,
     phone: document.getElementById('phone').value,
     date: document.getElementById('date').value,
