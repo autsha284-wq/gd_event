@@ -28,15 +28,17 @@ document.getElementById('bookForm').addEventListener('submit', function(e){
     name: document.getElementById('name').value,
     phone: document.getElementById('phone').value,
     date: document.getElementById('date').value,
-    interest : document.getElementById('interest').value,
-    message: document.getElementById('message').value,
-    email: "client@reply.com"
+    package: document.getElementById('package').value,
+    notes: document.getElementById('notes').value
   })
   .then(function(){
-    document.getElementById('bookMsg').innerHTML = "✅ Enquiry sent successfully!";
+    document.getElementById('bookMsg').innerHTML =
+      "✅ Enquiry sent successfully!";
     document.getElementById('bookForm').reset();
-  }, function(error){
-    document.getElementById('bookMsg').innerHTML = "❌ Failed to send. Try again.";
-    console.error(error);
+  })
+  .catch(function(error){
+    document.getElementById('bookMsg').innerHTML =
+      "❌ Failed to send. Try again.";
+    console.error("EmailJS Error:", error);
   });
 });
