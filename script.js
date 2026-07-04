@@ -17,9 +17,26 @@
     });
   });
 
-  // Booking form (front-end only demo)
-  document.getElementById('bookForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    document.getElementById('bookMsg').textContent = 'Thanks — your enquiry has been noted. We\'ll be in touch soon.';
-    this.reset();
+  (function(){
+  emailjs.init("vWJY6QCtxow9t7WUQ");
+})();
+
+document.getElementById('bookForm').addEventListener('submit', function(e){
+  e.preventDefault();
+
+  emailjs.send("service_rdwojrp", "template_ow0hksc", {
+    name: document.getElementById('name').value,
+    phone: document.getElementById('phone').value,
+    date: document.getElementById('date').value,
+    interest : document.getElementById('interest').value,
+    message: document.getElementById('message').value,
+    email: "client@reply.com"
+  })
+  .then(function(){
+    document.getElementById('bookMsg').innerHTML = "✅ Enquiry sent successfully!";
+    document.getElementById('bookForm').reset();
+  }, function(error){
+    document.getElementById('bookMsg').innerHTML = "❌ Failed to send. Try again.";
+    console.error(error);
   });
+});
