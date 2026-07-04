@@ -33,12 +33,12 @@ document.getElementById('bookForm').addEventListener('submit', function(e){
   })
   .then(function(){
     document.getElementById('bookMsg').innerHTML =
-      "✅ Enquiry sent successfully!";
+      alert("✅ Enquiry sent successfully!");
     document.getElementById('bookForm').reset();
   })
   .catch(function(error){
     document.getElementById('bookMsg').innerHTML =
-      "❌ Failed to send. Try again.";
+      alert("❌ Failed to send. Try again.");
     console.error("EmailJS Error:", error);
   });
 });
