@@ -18,6 +18,13 @@
     box-sizing: border-box;
 }
 
+img,
+video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -169,6 +176,8 @@ button {
     inset: 0;
     width: 100%;
     height: 100%;
+    max-width: none;
+    max-height: none;
     object-fit: cover;
     z-index: 0;
 }
@@ -586,12 +595,12 @@ section {
     border-radius: 6px;
     overflow: hidden;
     border: 1px dashed var(--glass-border);
-    background: var(--glass-fill);
+    background: var(--wine-900);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 1rem;
+    padding: 0;
     font-family: 'Space Mono', monospace;
     font-size: 0.75rem;
     letter-spacing: 0.16em;
@@ -599,10 +608,20 @@ section {
     color: var(--ink-mute);
 }
 
+.service-row-media a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
 .service-row-media img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
     display: block;
 }
 
@@ -714,6 +733,7 @@ body.detail-open .contact {
     border-radius: 4px;
     overflow: hidden;
     border: 1px solid var(--glass-border);
+    background: var(--wine-900);
 }
 
 .gallery-item .fill {
@@ -721,7 +741,9 @@ body.detail-open .contact {
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
     transition: transform .6s ease;
 }
 
@@ -862,6 +884,156 @@ footer .logo {
 
     .row-2 {
         grid-template-columns: 1fr;
+    }
+}
+
+/* ---------- EXTRA RESPONSIVE FIXES (phones & small tablets) ---------- */
+@media (max-width: 1024px) {
+    .service-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .service-rows {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .service-row,
+    .service-row.reverse {
+        gap: 1.6rem;
+    }
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 4.5rem 6%;
+    }
+
+    .nav {
+        padding: 1.1rem 5%;
+    }
+
+    .nav-cta {
+        padding: 0.5rem 1rem;
+        font-size: 0.78rem;
+    }
+
+    .hero {
+        min-height: 100svh;
+    }
+
+    .rings3d {
+        width: 160px;
+        height: 160px;
+    }
+
+    .ring.two {
+        inset: 26px;
+    }
+
+    .hero h1 {
+        font-size: clamp(2.4rem, 12vw, 4rem);
+    }
+
+    .hero .sub {
+        font-size: 1.05rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        max-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+        text-align: center;
+        width: 100%;
+    }
+
+    .section-head {
+        margin-bottom: 2.4rem;
+    }
+
+    .service-page .service-rows {
+        max-width: 100%;
+    }
+
+    .service-row-media {
+        aspect-ratio: 4 / 3;
+    }
+
+    .page-hero {
+        padding-top: 7rem;
+    }
+
+    .contact-wrap {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.7rem;
+    }
+
+    .service-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-card {
+        padding: 1.8rem 1.4rem;
+    }
+
+    .service-row-media {
+        aspect-ratio: 1 / 1;
+    }
+
+    .footer-contacts {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    .footer-contacts a {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .logo {
+        font-size: 1.25rem;
+    }
+
+    .eyebrow {
+        font-size: 0.62rem;
+        letter-spacing: 0.2em;
+    }
+
+    .hero h1 {
+        font-size: clamp(2rem, 13vw, 3rem);
+    }
+
+    .rings3d {
+        width: 130px;
+        height: 130px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+        padding: 0.85rem 1.4rem;
+        font-size: 0.8rem;
     }
 }
 
