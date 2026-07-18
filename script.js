@@ -1,4 +1,4 @@
- // Nav shadow on scroll
+// Nav shadow on scroll
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 20);
@@ -17,6 +17,62 @@
     });
   });
 
+  // Tap a service card -> show only that service's page (single index.html, no reload)
+  function openServicePage(id) {
+    document.querySelectorAll('.service-page-inline').forEach(el => el.classList.remove('active'));
+    const target = document.getElementById(id);
+    if (target) target.classList.add('active');
+    document.body.classList.add('detail-open');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  function closeServicePage() {
+    document.body.classList.remove('detail-open');
+    document.querySelectorAll('.service-page-inline').forEach(el => el.classList.remove('active'));
+  }
+
+  document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('click', e => {
+      e.preventDefault();
+      openServicePage(card.dataset.target);
+    });
+  });
+
+  document.querySelectorAll('.back-to-services').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      closeServicePage();
+      document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  document.querySelectorAll('.go-to-contact').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      closeServicePage();
+      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Header logo -> always takes you back to the main home page
+  document.getElementById('logoHome').addEventListener('click', () => {
+    closeServicePage();
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  });
+
+  // Top nav links -> close any open service page first so the target section is visible
+  document.querySelectorAll('.nav-links a, .nav-cta').forEach(link => {
+    link.addEventListener('click', e => {
+      const hash = link.getAttribute('href');
+      if (hash && hash.startsWith('#')) {
+        e.preventDefault();
+        closeServicePage();
+        const target = document.querySelector(hash);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
   (function(){
   emailjs.init("DXUgvz-eYN69tya74");
 })();
@@ -32,13 +88,11 @@ document.getElementById('bookForm').addEventListener('submit', function(e){
     notes: document.getElementById('notes').value
   })
   .then(function(){
-    document.getElementById('bookMsg').innerHTML =
-      alert("✅ Enquiry sent successfully!");
+    document.getElementById('bookMsg').innerHTML = "✅ Enquiry sent successfully!";
     document.getElementById('bookForm').reset();
   })
   .catch(function(error){
-    document.getElementById('bookMsg').innerHTML =
-      alert("❌ Failed to send. Try again.");
+    document.getElementById('bookMsg').innerHTML = "❌ Failed to send. Try again.";
     console.error("EmailJS Error:", error);
   });
 });
